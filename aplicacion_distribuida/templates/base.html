@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang = "es">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Santa Maria{% endblock %}</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    </head>
+    <body>
+        <nav>
+            <a href="{{ url_for('dashboard')}}">Inicio</a> |
+            <a href="{{ url_for('agregar_producto')}}">Agregar producto</a> |
+            <a href="{{ url_for('logout')}}">Cerrar sesión</a> |
+        </nav>
+        <main>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p style = "color:red;">{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            {% block content %}{% endblock %}
+        </main>
+    </body>
+</html>

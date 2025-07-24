@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Crear Producto{% endblock %}
+{% block content %}
+    <h2>Registrar producto</h2>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        {{ form.nombre.label  }} {{ form.nombre }}
+        {{ form.codigo.label  }} {{ form.codigo }}
+        {{ form.descripcion.label  }} {{ form.descripcion }}
+        {{ form.unidad.label }} {{ form.unidad }}
+        {{ form.categoria.label  }} {{ form.categoria }}
+        {{ form.submit }}
+
+    </form>
+{% endblock %}
