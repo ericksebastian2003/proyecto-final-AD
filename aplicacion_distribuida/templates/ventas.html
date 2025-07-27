@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Realizar Venta{% endblock %}
+{% block content %}
+<h2>Realizar Venta</h2>
+
+<form method="POST">
+
+<table border="1" cellpadding="5">
+    <tr>
+        <th>Producto</th>
+        <th>Precio</th>
+        <th>Stock disponible</th>
+        <th>Cantidad a vender</th>
+    </tr>
+    {% for producto in productos %}
+    <tr>
+        <td>{{ producto.nombre }}</td>
+        <td>${{ producto.precio }}</td>
+        <td>{{ producto.stock }}</td>
+        <td><input type="number" name="cantidad_{{ producto.id }}" min="0" max="{{ producto.stock }}" value="0"></td>
+    </tr>
+    {% endfor %}
+</table>
+
+<p>
+    <label for="forma_pago">Forma de pago:</label>
+    <select name="forma_pago" id="forma_pago" required>
+        <option value="efectivo">Efectivo</option>
+        <option value="tarjeta">Tarjeta</option>
+    </select>
+</p>
+
+<button type="submit">Registrar Venta</button>
+</form>
+
+<p><a href="{{ url_for('dashboard') }}">Volver al Dashboard</a></p>
+{% endblock %}

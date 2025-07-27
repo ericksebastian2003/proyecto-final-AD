@@ -1,15 +1,52 @@
-{% extends 'base.html' %}
-{% block title %}Crear Producto{% endblock %}
+{% extends "base.html" %}
+{% block title %}Productos{% endblock %}
 {% block content %}
-    <h2>Registrar producto</h2>
-    <form method="POST">
-        {{ form.hidden_tag() }}
-        {{ form.nombre.label  }} {{ form.nombre }}
-        {{ form.codigo.label  }} {{ form.codigo }}
-        {{ form.descripcion.label  }} {{ form.descripcion }}
-        {{ form.unidad.label }} {{ form.unidad }}
-        {{ form.categoria.label  }} {{ form.categoria }}
-        {{ form.submit }}
+<h2>Agregar Producto</h2>
+<form method="POST">
+    {{ form.hidden_tag() }}
 
-    </form>
+    {{ form.nombre.label }}<br>
+    {{ form.nombre() }}<br><br>
+
+    {{ form.codigo.label }}<br>
+    {{ form.codigo() }}<br><br>
+
+    {{ form.descripcion.label }}<br>
+    {{ form.descripcion() }}<br><br>
+
+    {{ form.unidad.label }}<br>
+    {{ form.unidad() }}<br><br>
+
+    {{ form.categoria.label }}<br>
+    {{ form.categoria() }}<br><br>
+
+    {{ form.stock.label }}<br>
+    {{ form.stock() }}<br><br>
+
+    {{ form.precio.label }}<br>
+    {{ form.precio() }}<br><br>
+
+    {{ form.submit() }}
+</form>
+
+<hr>
+
+<h3>Lista de productos</h3>
+<table border="1" cellpadding="5">
+    <tr>
+        <th>ID</th><th>Nombre</th><th>Código</th><th>Stock</th><th>Precio</th><th>Disponible</th>
+    </tr>
+    {% for producto in productos %}
+    <tr>
+        <td>{{ producto.id }}</td>
+        <td>{{ producto.nombre }}</td>
+        <td>{{ producto.codigo }}</td>
+        <td>{{ producto.stock }}</td>
+        <td>{{ producto.precio }}</td>
+        <td>{{ 'Sí' if producto.disponible else 'No' }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<p><a href="{{ url_for('dashboard') }}">Volver al Dashboard</a></p>
 {% endblock %}

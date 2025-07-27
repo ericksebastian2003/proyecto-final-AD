@@ -1,25 +1,40 @@
 <!DOCTYPE html>
-<html lang = "es">
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Santa Maria{% endblock %}</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    </head>
-    <body>
-        <nav>
-            <a href="{{ url_for('dashboard')}}">Inicio</a> |
-            <a href="{{ url_for('agregar_producto')}}">Agregar producto</a> |
-            <a href="{{ url_for('logout')}}">Cerrar sesión</a> |
-        </nav>
-        <main>
-            {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    {% for message in messages %}
-                        <p style = "color:red;">{{message}}</p>
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
-            {% block content %}{% endblock %}
-        </main>
-    </body>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>{% block title %}Supermercado Santa Maria{% endblock %}</title>
+</head>
+<body>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    {% if current_user.is_authenticated %}
+    <nav>
+        <a href="{{ url_for('dashboard') }}">Dashboard</a> |
+        <a href="{{ url_for('productos') }}">Productos</a> |
+        <a href="{{ url_for('ventas') }}">Ventas</a> |
+        <a href="{{ url_for('historial') }}">Historial de Ventas</a> |
+        <a href="{{ url_for('logout') }}">Cerrar sesión</a>
+    </nav>
+    <hr>
+    {% else %}
+    <nav>
+        <a href="{{ url_for('login') }}">Iniciar sesión</a> |
+        <a href="{{ url_for('registrar_usuario') }}">Registrar usuario</a>
+    </nav>
+    <hr>
+    {% endif %}
+
+    {% block content %}{% endblock %}
+    
+</body>
 </html>

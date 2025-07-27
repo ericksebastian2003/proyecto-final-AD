@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Historial de Ventas{% endblock %}
+{% block content %}
+<h2>Historial de Ventas</h2>
+
+<table border="1" cellpadding="5">
+    <tr>
+        <th>ID Venta</th>
+        <th>Fecha</th>
+        <th>Usuario</th>
+        <th>Forma de Pago</th>
+        <th>Total</th>
+        <th>Detalles</th>
+    </tr>
+    {% for venta in ventas %}
+    <tr>
+        <td>{{ venta.id }}</td>
+        <td>{{ venta.fecha.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+        <td>{{ venta.usuario.nombre }}</td>
+        <td>{{ venta.forma_pago }}</td>
+        <td>${{ '%.2f'|format(venta.total) }}</td>
+        <td>
+            <ul>
+                {% for detalle in venta.detalles %}
+                <li>{{ detalle.producto.nombre }} - Cantidad: {{ detalle.cantidad }} - Precio Unitario: ${{ detalle.precio_unitario }}</li>
+                {% endfor %}
+            </ul>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<p><a href="{{ url_for('dashboard') }}">Volver al Dashboard</a></p>
+{% endblock %}

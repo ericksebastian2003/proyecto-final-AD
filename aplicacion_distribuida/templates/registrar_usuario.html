@@ -1,16 +1,23 @@
 {% extends "base.html" %}
-{% block title %}Login{% endblock %}
+{% block title %}Registrar Usuario{% endblock %}
 {% block content %}
-<h2>Iniciar sesión</h2>
+<h2>Registrar usuario</h2>
 <form method="POST">
     {{ form.hidden_tag() }}
+
+    {{ form.nombre.label }}<br>
+    {{ form.nombre() }}<br><br>
+
     {{ form.correo.label }}<br>
     {{ form.correo() }}<br><br>
 
     {{ form.contraseña.label }}<br>
     {{ form.contraseña() }}<br><br>
 
+    {{ form.rol.label }}<br>
+    {{ form.rol() }}<br><br>
+
     {{ form.submit() }}
 </form>
-<p>¿No tienes cuenta? <a href="{{ url_for('registrar_usuario') }}">Regístrate aquí</a></p>
+<p><a href="{{ url_for('login') }}">Volver al login</a></p>
 {% endblock %}
